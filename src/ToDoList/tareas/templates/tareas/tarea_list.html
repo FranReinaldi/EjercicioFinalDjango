@@ -1,0 +1,81 @@
+{% extends 'base.html'%}
+
+{% block title  %} Libros {% endblock%}
+
+{% block content %}
+<form method="GET" method=".">
+    <div class="col-span-6 sm:col-span-3 mb-6">
+        <label for="first-name" class="text-sm font-medium text-gray-700">Buscar</label>
+        <input type="text" name="buscar" value="{{ search_text }}" class="focus:ring-gray-500 focus:border-gray-500 shadow-sm sm:text-sm border-gray-400 rounded-md">
+        <button  type="submit" class="py-1 px-2 border border-transparent shadow-sm text-sm font-small rounded-md text-white bg-dark hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Buscar
+        </button>
+    </div>
+</form>
+<div class="flex flex-col">
+    <table class="table">
+            <thead >
+              <tr>
+                <th scope="col">
+                  Nombre
+                </th>
+                <th scope="col">
+                  Descripcion
+                </th>
+                <th scope="col">
+                  Estado
+                </th>
+                <th scope="col">
+                  Fecha vencimiento
+                </th>
+                <th scope="col" >
+                  <span class="sr-only">Detalle</span>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for tarea in tareas %}
+              {% if tarea.user == request.user %}
+              <tr>
+                <td>
+                  {{ tarea.name }}
+                </td>
+                <td>
+                  {{ tarea.description }}
+                </td>
+                <td>
+                    {{ tarea.status }}
+                </td>
+                <td>
+                  {% if tarea.is_past_due %}
+                  <p class="text-danger">tarea vencida</p>
+                  {% else %}
+                  {{ tarea.expire_date }}
+                  
+                  {% endif %}
+
+                </td>
+                <td>
+                  <a href="/{{ tarea.pk }}" class="text-indigo-600 hover:text-indigo-900">Ver</a>
+                </td>
+              </tr>
+              {% endif %}
+              {% endfor %}
+            </tbody>
+          </table>
+          <form method="POST" action=".">
+            {% csrf_token %}
+            {{ form }}
+            
+            <button type="submit">Enviar</button>
+            </form>
+            {% if error %}
+            Error de validacion en el formulario
+            {% endif %}
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+{% endblock%}
