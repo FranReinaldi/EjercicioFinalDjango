@@ -48,7 +48,7 @@
                 </td>
                 <td>
                   {% if tarea.is_past_due %}
-                  <p class="text-danger">tarea vencida</p>
+                  <p class="text-danger">tarea vencida desde {{ tarea.expire_date }}</p>
                   {% else %}
                   {{ tarea.expire_date }}
                   
@@ -66,13 +66,9 @@
           <form method="POST" action=".">
             {% csrf_token %}
             {{ form }}
-            
             <button type="submit">Enviar</button>
             </form>
-            {% if error %}
-            Error de validacion en el formulario
-            {% endif %}
-          
+            
         </div>
       </div>
     </div>
