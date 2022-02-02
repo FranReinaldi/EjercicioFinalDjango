@@ -20,9 +20,12 @@ class Tarea(models.Model):
     date_create = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     expire_date = models.DateTimeField('Fecha de vencimiento', null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
     @property
     def is_past_due(self):
+        """
+        permite calcular si la tarea esta vencida o no
+        """
         return datetime.today() > self.expire_date.replace(tzinfo=None)
     
 

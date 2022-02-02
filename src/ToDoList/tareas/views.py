@@ -15,6 +15,9 @@ from .models import Tarea
 
 @login_required
 def get_tareas(request):
+    """
+    lista todas las tareas del usuario
+    """
     tareas = Tarea.objects.all()
     busqueda = request.GET.get("buscar")
     if busqueda:
@@ -27,6 +30,7 @@ def get_tareas(request):
     error = False
     if request.method == 'POST':
         form = CreationForm(request.POST)
+        form.instance.user= request.user
         if form.is_valid():
             form.save(commit=True)
         else:
@@ -37,6 +41,9 @@ def get_tareas(request):
                            'form': form})
 
 @login_required
+"""
+muestra una tarea en especifico
+"""
 def tarea(request, id_tarea):
     tarea = Tarea.objects.get(pk=id_tarea)
     form = EditForm(instance=tarea)
@@ -50,6 +57,9 @@ def tarea(request, id_tarea):
 
 
 def eliminar_tarea(request, id_tarea):
+    """
+    permite eliminar una tarea
+    """
     try:
         tarea = Tarea.objects.get(pk=id_tarea)
     except Tarea.DoesNotExist:
@@ -62,6 +72,9 @@ def eliminar_tarea(request, id_tarea):
         return redirect("../")
 
 def register_request(request):
+    """
+    permite registrar nuevos usuarios
+    """
 	if request.method == "POST":
 		form = NewUserForm(request.POST)
 		if form.is_valid():
