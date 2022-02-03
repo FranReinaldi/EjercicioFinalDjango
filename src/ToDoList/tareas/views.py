@@ -27,6 +27,7 @@ def get_tareas(request):
             Q(status__icontains = busqueda)
         ).distinct()
     form = CreationForm()
+    form.instance.user= request.user
     error = False
     if request.method == 'POST':
         form = CreationForm(request.POST)

@@ -4,6 +4,7 @@
 
 {% block content %}
 <div class="container">
+  <h1 class="text-center">Tarea</h1>
     
     <div >
       <dl>
@@ -48,49 +49,24 @@
           </dd>
         </div>
         <div >
+          <br>
+          <br>
           
           <dd class="col text-center">
-            <p>EDITAR TAREA</p>
+            <h1>Editar</h1>
             <form method="POST" action="/{{tarea.id}}">
               {% csrf_token %}
-              <div class="form-group">
-                <p>Nombre:</p>
-                <input type="text" class="form-control" name="{{form.name.name}}">
-              </div>
-              <br>
-              <div class="form-group">
-                <p>Descripcion:</p>
-                  <input type="text" class="form-control" name="{{form.description.name}}">
-              </div>
-              <br>
-              <div class="form-group">
-                <p>Comentarios:</p>
-                  <input type="text" class="form-control" name="{{form.comments.name}}">
-              </div>
-              <br>
-              <div class="form-group">
-                <p>Estado:</p>
-                <input type="select" class="form-control" name="{{form.status.name}}" list=estados>
-              </div>
-              <br>
-              <button class="btn btn-primary " type="submit">Editar</button>
+              {{form.as_p}}
+              <button class="btn btn-outline-primary " type="submit">Editar</button>
     
               </form>
-              <datalist id="estados">
-
-                <option value="To Do">
               
-                <option value="In Progress">
-              
-                <option value="Done">
-              
-                <option value="Close">
           </dd>
           <br>
           <div class="col text-center">
-            <a href="/delete/{{tarea.id}}" class="btn btn-danger align-self-center mr-3">Eliminar tarea</a>
+            <a href="/delete/{{tarea.id}}" class="btn btn-outline-danger align-self-center mr-3">Eliminar tarea</a>
             <br><br>
-            <div class="col text-center"><a href="/" class="btn btn-primary align-self-center mr-3">Regresar</a></div>
+            <div class="col text-center"><a href="/" class="btn btn-outline-primary align-self-center mr-3">Regresar</a></div>
             
             
         </div>

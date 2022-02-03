@@ -20,7 +20,7 @@ class Tarea(models.Model):
     date_create = models.DateTimeField(auto_now_add=True)
     last_update = models.DateTimeField(auto_now=True)
     expire_date = models.DateTimeField('Fecha de vencimiento', null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, default=None)
     @property
     def is_past_due(self):
         """
