@@ -14,7 +14,7 @@ class Tarea(models.Model):
     )
     name = models.CharField('Nombre', max_length=30)
     description = models.TextField('Descripción', max_length=50)
-    comments = models.TextField('Comentarios', max_length=250, null=True)
+    comments = models.TextField('Comentarios', max_length=250, null=True,default='')
     status = models.CharField('Estado',max_length=20, choices=STATUS_CHOICES,
                                 default='To Do')
     date_create = models.DateTimeField(auto_now_add=True)

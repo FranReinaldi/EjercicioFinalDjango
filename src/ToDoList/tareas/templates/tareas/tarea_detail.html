@@ -4,54 +4,77 @@
 
 {% block content %}
 <div class="container">
-  <h1 class="text-center">Tarea</h1>
+  <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark">
+    <div class="col-md-6 px-0">
+      <h1 class="display-4 fst-italic">{{ tarea.name }}</h1>
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        
+        <div class="col p-4 d-flex flex-column position-static">
+          
+          <h3 class="mb-0 text-primary">Descripcion</h3>
+        <p class="card-text mb-auto">{{ tarea.description }}</p>
+
+        </div>
+        
+      </div>
+    </div>
+      <div class="col-md-6">
+
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          
+          <div class="col p-4 d-flex flex-column position-static">
+            
+            <h3 class="mb-0 text-success">Comentarios</h3>
+            <p class="card-text mb-auto">{{ tarea.comments }}</p>
+
+          </div>
+          
+        </div>
+      </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-6">
+      
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+        
+        <div class="col p-4 d-flex flex-column position-static">
+
+          {% if tarea.is_past_due %}
+          <h3 class="mb-0 text-danger">Fecha de vencimiento</h3>
+          <p class="card-text mb-auto">{{ tarea.expire_date }}</p>
+          <p class=" mb-0 text-danger">VENCIDA</p>
+          {% else %}
+          <h3 class="mb-0 text-success">Fecha de vencimiento</h3>
+          <p class="card-text mb-auto">{{ tarea.expire_date }}</p>
+          {% endif %}
+        </div>
+        
+      </div>
+    </div>
+      <div class="col-md-6">
+
+        <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
+          
+          <div class="col p-4 d-flex flex-column position-static">
+            
+            <h3 class="mb-0 text-primary">Estado</h3>
+            <p class="card-text mb-auto">{{ tarea.get_status_display }}</p>
+
+          </div>
+          
+        </div>
+      </div>
+  </div>
+  
+  
     
     <div >
       <dl>
-        <div>
-          <dt class="text-center">
-            Nombre
-          </dt>
-          <dd class="text-center">
-            {{ tarea.name }}
-          </dd>
-        </div>
-        <div >
-          <dt class="text-center">
-            Descripcion
-          </dt>
-          <dd class="text-center" >
-            {{ tarea.description }}
-          </dd>
-        </div>
-        <div >
-          <dt class="text-center">
-            Comentarios
-          </dt>
-          <dd class="text-center">
-            {{ tarea.comments }}
-          </dd>
-        </div>
-        <div >
-          <dt class="text-center">
-            Fecha de vencimiento
-          </dt>
-          <dd class="text-center">
-            {{ tarea.expire_date }}
-          </dd>
-        </div>
-        <div >
-          <dt class="text-center">
-            Estado
-          </dt>
-          <dd class="text-center">
-            {{ tarea.get_status_display }}
-          </dd>
-        </div>
-        <div >
-          <br>
-          <br>
-          
           <dd class="col text-center">
             <h1>Editar</h1>
             <form method="POST" action="/{{tarea.id}}">
