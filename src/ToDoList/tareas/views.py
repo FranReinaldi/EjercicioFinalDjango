@@ -26,11 +26,10 @@ def get_tareas(request):
             Q(description__icontains = busqueda)|
             Q(status__icontains = busqueda)
         ).distinct()
-    form = CreationForm()
-    form.instance.user= request.user
+    form = CreationForm(initial={'user':request.user})
     error = False
     if request.method == 'POST':
-        form = CreationForm(request.POST)
+        form = CreationForm(request.POST,initial={'user':request.user})
         form.instance.user= request.user
         if form.is_valid():
             form.save(commit=True)
