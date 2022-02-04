@@ -21,14 +21,7 @@ class CreationForm(ModelForm):
     name = forms.CharField(label='Nombre',widget=forms.TextInput(attrs={'class': 'form-control'}))
     description = forms.CharField(label='Descripcion',widget=forms.TextInput(attrs={'class': 'form-control'}))
     expire_date = forms.DateTimeField(label='Fecha de vencimiento',widget=forms.NumberInput(attrs={'type': 'date'}))
-    user = forms.ModelChoiceField(widget=forms.Select(attrs={
-        'class':"form-control",}),
-                              required=True,
-                              error_messages={
-                              'required':'Seleccione usuario'
-                              },
-                              queryset=User.objects.all()
-	)
+ 
 	 
 	
 	
