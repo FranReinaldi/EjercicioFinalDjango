@@ -30,7 +30,6 @@ def get_tareas(request):
     error = False
     if request.method == 'POST':
         form = CreationForm(request.POST,initial={'user':request.user})
-        form.instance.user= request.user
         if form.is_valid():
             form.save(commit=True)
         else:
